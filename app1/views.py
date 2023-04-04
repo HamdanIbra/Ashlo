@@ -54,5 +54,21 @@ def registration(request):
         request.session['user_id'] = user.id
     return redirect('/')
 
+def boys(request):
+    context={
+        'boys_clothes':Cloth.objects.filter(gender=boys),
+    }
+    return render(request,'boy.html',context)
 
+def girls(request):
+    context={
+        'girls_clothes':Cloth.objects.filter(gender=girls),
+    }
+    return render(request,'girl.html',context)
+
+def view_cloth(request):
+    context={
+        'cloth':Cloth.objects.get(id),
+    }
+    return render(request,'view.html')
 # Create your views here.
