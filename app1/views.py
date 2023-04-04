@@ -71,4 +71,27 @@ def view_cloth(request):
         'cloth':Cloth.objects.get(id),
     }
     return render(request,'view.html')
-# Create your views here.
+
+def checkout(request):
+    # errors = Address.objects.basic_validator(request.POST)
+    # # check if the errors dictionary has anything in it
+    # if len(errors) > 0:
+    #     # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
+    #     for key, value in errors.items():
+    #         messages.error(request, value)
+    #     # redirect the user back to the form to fix the errors
+    #     return redirect('/')
+    return render(request, "checkout.html")
+
+
+def admin(request):
+    # errors = Cloth.objects.basic_validator(request.POST)
+    # # check if the errors dictionary has anything in it
+    # if len(errors) > 0:
+    #     # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
+    #     for key, value in errors.items():
+    #         messages.error(request, value)
+    #     # redirect the user back to the form to fix the errors
+    #     return redirect('/')
+    return render(request, "admin.html")
+
