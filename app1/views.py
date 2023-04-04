@@ -11,14 +11,6 @@ def login(request):
 
 
 def login_form(request):
-    errors = User.objects.basic_validator(request.POST)
-    # check if the errors dictionary has anything in it
-    if len(errors) > 0:
-        # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
-        for key, value in errors.items():
-            messages.error(request, value)
-        # redirect the user back to the form to fix the errors
-        return redirect('/login')
     email = request.POST['email']
     password = request.POST['password']
     user = User.objects.filter(email=email).first()
@@ -55,22 +47,24 @@ def registration(request):
     return redirect('/')
 
 def boys(request):
+    boys_clothes=Cloth.objects.all()
     context={
-        'boys_clothes':Cloth.objects.filter(gender=boys),
+        'boys_clothes':boys_clothes,
     }
     return render(request,'boy.html',context)
 
 def girls(request):
+    girls_clothes=Cloth.objects.all()
     context={
-        'girls_clothes':Cloth.objects.filter(gender=girls),
+        'girls_clothes':girls_clothes,
     }
     return render(request,'girl.html',context)
 
-def view_cloth(request):
+def view_cloth(request,id):
     context={
-        'cloth':Cloth.objects.get(id),
+        'cloth':Cloth.objects.get(id=id),
     }
-    return render(request,'view.html')
+    return render(request,'view.html',context)
 
 def checkout(request):
     # errors = Address.objects.basic_validator(request.POST)
@@ -85,13 +79,62 @@ def checkout(request):
 
 
 def admin(request):
-    # errors = Cloth.objects.basic_validator(request.POST)
-    # # check if the errors dictionary has anything in it
-    # if len(errors) > 0:
-    #     # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
-    #     for key, value in errors.items():
-    #         messages.error(request, value)
-    #     # redirect the user back to the form to fix the errors
-    #     return redirect('/')
-    return render(request, "admin.html")
+    return render(request,'admin.html')
+
+
+
+def create_cloth(request):
+    errors = Cloth.objects.basic_validator(request.POST)
+    # check if the errors dictionary has anything in it
+    if len(errors) > 0:
+        # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
+        for key, value in errors.items():
+            messages.error(request, value)
+        # redirect the user back to the form to fix the errors
+        return redirect('/')
+    else:
+        size=request.POST['size']
+        gender=request.POST['gender']
+        pic_src=request.POST['pic_source']
+        description=request.POST['description']
+        price=request.POST['price']
+        quantity=request.POST['quantity']
+        Cloth.objects.create(size=size, gender=gender, pic_src=pic_src,description=description, price=price, quantity=quantity)
+        cloth=Cloth.objects.last()
+        if cloth.gender == 'boys':
+            return redirect('/boys')
+        else:
+            return redirect('/girls')
+
+def add_to_cart(request,id):
+    user=User.objects.get(id=request.session['user_id'])
+    Order.objects.create(user=user)
+    OrderCloth.objects.create(order=Order.objects.last(),cloth=Cloth.objects.get(id=id),quantity=int(request.POST['quantity']))
+    return redirect('/cart')
+
+# def cart(request):
+#     user=User.objects.get(id=request.session['user_id'])
+#     order=Order.objects.filter(user=user)
+#     total_items=sum([oc.quanity for oc in order.ordercloth_set.all()])
+#     total_price=sum([oc.quanity * oc.cloth.price  for oc in order.ordercloth_set.all()])
+#     context={
+#         'all_cloth_orders':order.orderclothes.all(),
+#         'total_items':total_items,
+#         'total_price':total_price
+#     }
+#     return render(request,'cart.html',context)
+
+def cart(request):
+    user = User.objects.get(id=request.session['user_id'])
+    order = Order.objects.filter(user=user).first() # get the first order for the user
+    order_clothes = OrderCloth.objects.filter(order=order) # filter OrderCloth objects by order id
+    total_items = sum([oc.quantity for oc in order_clothes])
+    total_price = sum([oc.quantity * oc.cloth.price for oc in order_clothes])
+    context = {
+        'all_cloth_orders': order_clothes,
+        'total_items': total_items,
+        'total_price': total_price
+    }
+    return render(request, 'cart.html', context)
+
 

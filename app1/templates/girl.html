@@ -15,36 +15,67 @@
 
 <body>
     <header class="container-fluid fixed-top">
-        <div class="row d-flex justify-content-between align-items-center navbar navbar-expand-lg navbar-dark bg-white ">
+        <div
+            class="row d-flex justify-content-between align-items-center navbar navbar-expand-lg navbar-dark bg-white ">
             <div class="col-md-2">
-                <a href="/"><img src="{%static 'images/ashlo.png'%}"  class="img-fluid w-90"></a>
+                <a href="/"><img src="{%static 'images/ashlo.png'%}" class="img-fluid w-90"></a>
             </div>
             <div class="col-md-8 d-flex justify-content-around">
-                <a href="/boys" class="boys "><h3 class="boys">Boys Collection</h3></a>
-                <a href="/girls" class="girls"><h3 class="girls">Girls Collection</h3></a>
+                <a href="/boys" class="boys ">
+                    <h3 class="boys">Boys Collection</h3>
+                </a>
+                <a href="/girls" class="girls">
+                    <h3 class="girls">Girls Collection</h3>
+                </a>
             </div>
             <div class="col-md-2">
                 <div class=" d-flex align-items-center justify-content-around ">
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/login"><img src="{%static 'images/123.png'%}"  class="img-fluid "></a>
+                        <a href="/login"><img src="{%static 'images/123.png'%}" class="img-fluid "></a>
                     </div>
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/cart"><img src="{%static 'images/pinkcart.png'%}"  class="img-fluid "></a>
+                        <a href="/cart"><img src="{%static 'images/pinkcart.png'%}" class="img-fluid "></a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <div class="row justify-content-around mt-5 pt-5 ">
-        <div class="card" style="width: 18rem;">
-            <img src="{% static 'newborn_girl.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">product</h5>
-                <p class="card-text">Reversible windbreaker jacket </p>
-                <a href="#" class="btn btn-primary">view</a>
+    <!-- <div class="container">
+        {% for cloth in girls_clothes %}
+        <div class="row justify-content-around mt-5 pt-5">
+            <div class=" col-md-4" >
+                <img src="{% static 'images/' %}{{ cloth.pic_src }}" class="img-fluid " alt="...">
+                <div class="">
+                    <p class="">{{cloth.description}} </p>
+                    <p class="">{{cloth.price}} </p>
+                    <a href="/view/{{cloth.id}}" class="btn btn-primary">view</a>
+                </div>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
+    </div>
+        {% endfor %} -->
+    <div class="container">
+        <div class="row justify-content-around mt-5 pt-5">
+            {% for cloth in girls_clothes %}
+            <div class="col-md-4">
+                <img src="{% static 'images/' %}{{ cloth.pic_src }}" class="img-fluid" alt="">
+                <div>
+                    <p>{{ cloth.description }}</p>
+                    <p>{{ cloth.price }}</p>
+                    <a href="/view/{{ cloth.id }}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class="row justify-content-around mt-5 pt-5">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <!-- <div class="card" style="width: 18rem;">
             <img src="{% static 'newborn_girl1.jpeg' %}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">product</h5>
@@ -59,9 +90,9 @@
                 <p class="card-text">Reversible windbreaker jacket </p>
                 <a href="/view/{{cloth.id}}" class="btn btn-primary">view</a>
             </div>
-        </div>
-    </div>
-    <div class="row justify-content-around mt-5 pt-5">
+        </div> -->
+
+    <!-- <div class="row justify-content-around mt-5 pt-5">
         <div class="card" style="width: 18rem;">
             <img src="{% static 'baby_girl6.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -138,7 +169,7 @@
                 <a href="#" class="btn btn-primary">view</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>

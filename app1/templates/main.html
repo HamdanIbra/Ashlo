@@ -17,6 +17,9 @@
             </div>
             <div class="col-md-8 d-flex justify-content-around">
                 <a href="/boys" class="boys "><h3 class="boys">Boys Collection</h3></a>
+                {% if request.session.user_id == 1 %}
+                <a href="/admin" class="boys "><h3 class="boys">Add Clothes</h3></a>
+                {% endif %}
                 <a href="/girls" class="girls"><h3 class="girls">Girls Collection</h3></a>
             </div>
             <div class="col-md-2">
