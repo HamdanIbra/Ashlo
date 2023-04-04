@@ -15,21 +15,26 @@
 
 <body>
     <header class="container-fluid fixed-top">
-        <div class="row d-flex justify-content-between align-items-center navbar navbar-expand-lg navbar-dark bg-white ">
+        <div
+            class="row d-flex justify-content-between align-items-center navbar navbar-expand-lg navbar-dark bg-white ">
             <div class="col-md-2">
-                <a href="/"><img src="{%static 'images/ashlo.png'%}"  class="img-fluid w-90"></a>
+                <a href="/"><img src="{%static 'images/ashlo.png'%}" class="img-fluid w-90"></a>
             </div>
             <div class="col-md-8 d-flex justify-content-around">
-                <a href="/boys" class="boys "><h3 class="boys">Boys Collection</h3></a>
-                <a href="/girls" class="girls"><h3 class="girls">Girls Collection</h3></a>
+                <a href="/boys" class="boys ">
+                    <h3 class="boys">Boys Collection</h3>
+                </a>
+                <a href="/girls" class="girls">
+                    <h3 class="girls">Girls Collection</h3>
+                </a>
             </div>
             <div class="col-md-2">
                 <div class=" d-flex align-items-center justify-content-around ">
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/login"><img src="{%static 'images/123.png'%}"  class="img-fluid "></a>
+                        <a href="/login"><img src="{%static 'images/123.png'%}" class="img-fluid "></a>
                     </div>
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/cart"><img src="{%static 'images/pinkcart.png'%}"  class="img-fluid "></a>
+                        <a href="/cart"><img src="{%static 'images/pinkcart.png'%}" class="img-fluid "></a>
                     </div>
                 </div>
             </div>
@@ -38,19 +43,20 @@
 
     <div class="container-fluid mt-5 ">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-4" >
-                <img src="{% static 'view.jpg' %}" class="card-img-top img-fluid " alt="...">
+            <div class="col-md-4">
+                <img src="{%static 'images/%s' % cloth.pic_src %}" class="card-img-top img-fluid " alt="...">
             </div>
             <div class="col-md-5 ">
-                <h5 class="card-title">product</h5>
-                <p class="mb-5">Short sleeved dress for girl. Round neckline. Small opening on the back with a
-                    button
-                    fastening to allow the garment to be put on easily.
-                    <br> Elasticated waistband for a better fit. Patterned design.
-                </p>
-                <button type="button" class="btn btn-primary"
+                <p class="mb-5">Size : {{cloth.size}}</p>
+                <p class="mb-5">Description : {{cloth.description}}</p>
+                <form action="/add_to_cart/{{cloth.id}}" method="post">
+                    {% csrf_token %}
+                    <p>Quanity: <input type="number" name="quantity" ></p>
+                    <button type="submit" class="btn btn-primary"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     Add to cart</button>
+                </form>
+                
                 <button type="button" class="btn btn-primary"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     Continue Shopping

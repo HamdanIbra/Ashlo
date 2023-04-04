@@ -35,16 +35,19 @@
             </div>
         </div>
     </header>
+    
     <div class="row justify-content-around mt-5 pt-5">
+        {% for cloth in boys_clothes %}
         <div class="card" style="width: 18rem;">
-            <img src="{% static 'newborn_baby_1.jpeg' %}" class="card-img-top" alt="...">
+            <img src="{%static 'images/%s' % cloth.pic_src %}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">product</h5>
-                <p class="card-text">Reversible windbreaker jacket </p>
+                <p class="card-text">{{cloth.description}} </p>
+                <p class="card-text">{{cloth.price}} </p>
                 <a href="/view/{{cloth.id}}" class="btn btn-primary">view</a>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
+        {% endfor %}
+        <!-- <div class="card" style="width: 18rem;">
             <img src="{% static 'newborn_baby_4.jpeg' %}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">product</h5>
@@ -59,9 +62,9 @@
                 <p class="card-text">Reversible windbreaker jacket </p>
                 <a href="#" class="btn btn-primary">view</a>
             </div>
-        </div>
+        </div> -->
     </div>
-    <div class="row justify-content-around mt-5 pt-5">
+    <!-- <div class="row justify-content-around mt-5 pt-5">
         <div class="card" style="width: 18rem;">
             <img src="{% static 'baby_1.jpeg' %}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -138,7 +141,7 @@
                 <a href="#" class="btn btn-primary">view</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>
