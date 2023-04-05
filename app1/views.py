@@ -184,3 +184,5 @@ def logout(request):
     del request.session['user_id']
     del request.session['admin']
     return redirect('/login')
+
+
