@@ -14,9 +14,14 @@ def login_form(request):
     email = request.POST['email']
     password = request.POST['password']
     user = User.objects.filter(email=email).first()
+    email=["ibra@gmail.com","taleen@gmail.com","shadid@gmail.com"]
     if user:
         if bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['user_id'] = user.id
+            if user.email in email:
+                request.session['admin'] = 1
+            else:
+                request.session['admin'] = 0
             return redirect('/')
     messages.error(request, 'Invalid Credentials')
     return redirect('/login')
@@ -179,3 +184,8 @@ def delete(request,id):
     cloth_order.delete()
     return redirect('/cart')
 
+
+def logout(request):
+    del request.session['user_id']
+    del request.session['admin']
+    return redirect('/login')

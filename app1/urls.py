@@ -18,5 +18,6 @@ urlpatterns = [
     path('order_success',views.order_success),
     path('delete_users',views.delete_users),
     path('edit/<int:id>',views.edit_quantity),
-    path('delete/<int:id>',views.delete)
+    path('delete/<int:id>',views.delete),
+    path('logout',views.logout),
 ]
