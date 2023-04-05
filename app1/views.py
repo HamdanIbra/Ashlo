@@ -108,8 +108,7 @@ def create_cloth(request):
 
 def add_to_cart(request,id):
     user=User.objects.get(id=request.session['user_id'])
-    Order.objects.create(user=user)
-    OrderCloth.objects.create(order=Order.objects.last(),cloth=Cloth.objects.get(id=id),quantity=int(request.POST['quantity']))
+    Clothorder.objects.create(user=user,cloth=Cloth.objects.get(id=id),quantity=int(request.POST['quantity']))
     return redirect('/cart')
 
 # def cart(request):
@@ -126,12 +125,11 @@ def add_to_cart(request,id):
 
 def cart(request):
     user = User.objects.get(id=request.session['user_id'])
-    order = Order.objects.filter(user=user).first() # get the first order for the user
-    order_clothes = OrderCloth.objects.filter(order=order) # filter OrderCloth objects by order id
-    total_items = sum([oc.quantity for oc in order_clothes])
-    total_price = sum([oc.quantity * oc.cloth.price for oc in order_clothes])
+    ordered_clothes = user.clothorders.all() # filter OrderCloth objects by order id
+    total_items = sum([oc.quantity for oc in user.clothorders.all()])
+    total_price = sum([oc.quantity * oc.cloth.price for oc in user.clothorders.all()])
     context = {
-        'all_cloth_orders': order_clothes,
+        'all_cloth_orders': ordered_clothes,
         'total_items': total_items,
         'total_price': total_price
     }

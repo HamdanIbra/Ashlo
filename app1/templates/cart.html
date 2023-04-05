@@ -35,7 +35,7 @@
         {% for cloth_order in all_cloth_orders %}
         <div class="row justify-content-center align-items-center">
             <div class="col-md-3">
-                <img src="{%static 'images/%s' % cloth_order.cloth.pic_src %}" alt="" class="img-fluid ">
+                <img src="{% static 'images/' %}{{ cloth_order.cloth.pic_src }}" alt="" class="img-fluid ">
 
             </div>
             <div class="col-md-2 ms-5">
@@ -49,7 +49,7 @@
                 <a href="/delete/{{cloth_order.id}}" class="btn btn-primary">delete</a>
             </div>
             <div class="col-md-2">
-                <a href="/edit/{{cloth_order.id}}" class="btn btn-primary">delete</a>
+                <a href="/edit/{{cloth_order.id}}" class="btn btn-primary">Edit Quantity</a>
             </div>
         </div>
         <hr>
