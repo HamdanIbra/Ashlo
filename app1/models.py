@@ -13,8 +13,8 @@ class UserManager(models.Manager):
             errors["email"] = "Invalid email address"
         if len(postData['password']) < 8:
             errors["password"] = "Password should be at least 8 characters"
-        if postData['password'] != postData['confirm']:
-            errors['confirm'] = "Passwords do not match"
+        if postData['password'] != postData['repeatpassword']:
+            errors['repeatpassword'] = "Passwords do not match"
         return errors
 
 class User(models.Model):

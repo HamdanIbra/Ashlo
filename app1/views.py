@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from .models import *
+from django.http import JsonResponse
 import bcrypt
 from django.contrib import messages
 
@@ -31,11 +32,13 @@ def registration(request):
     errors = User.objects.basic_validator(request.POST)
     # check if the errors dictionary has anything in it
     if len(errors) > 0:
+        error_list = []
         # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
         for key, value in errors.items():
-            messages.error(request, value)
+            error_list.append(value)
+        return JsonResponse({'success': False, 'errors': error_list})
         # redirect the user back to the form to fix the errors
-        return redirect('/register')
+        # return redirect('/register')
     else:
         fname = request.POST['first_name']
         lname = request.POST['last_name']
@@ -45,7 +48,8 @@ def registration(request):
         User.objects.create(first_name=fname, last_name=lname,email=email, password=hashed)
         user = User.objects.last()
         request.session['user_id'] = user.id
-    return redirect('/')
+        return JsonResponse({'success': True})
+    # return redirect('/')
 
 def boys(request):
     boys_clothes=Cloth.objects.all()
