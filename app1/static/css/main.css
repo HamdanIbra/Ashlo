@@ -1,8 +1,18 @@
-.boys{
+.boys {
     color: #0f4e8e;
     text-decoration: none;
 }
-.girls{
+
+.girls {
     color: #fcc0cd;
     text-decoration: none;
+}
+
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 50vh;
+    margin-top: 40px;
+    /* padding: 20px; */
+    left: 0;
 }

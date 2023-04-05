@@ -21,25 +21,31 @@
                 <a href="/"><img src="{%static 'images/ashlo.png'%}" class="img-fluid w-90"></a>
             </div>
             <div class="col-md-8 d-flex justify-content-around">
-                <a href="/boys" class="boys ">
-                    <h3 class="boys">Boys Collection</h3>
+                {% if request.session.admin == 1 %}
+                <a href="/admin" class="boys ">
+                    <h3 class="boys">Add Clothes</h3>
                 </a>
+                {% endif %}
                 <a href="/girls" class="girls">
-                    <h3 class="girls">Girls Collection</h3>
+                    <h3 class="girls">Ashlo Collection</h3>
                 </a>
             </div>
             <div class="col-md-2">
                 <div class=" d-flex align-items-center justify-content-around ">
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/login"><img src="{%static 'images/123.png'%}" class="img-fluid "></a>
+                        <a href="/login"><img src="{%static 'images/user.png'%}" class="img-fluid "></a>
                     </div>
                     <div class="w-25 align-items-center mt-2">
                         <a href="/cart"><img src="{%static 'images/pinkcart.png'%}" class="img-fluid "></a>
+                    </div>
+                    <div class="w-25 align-items-center mt-2">
+                        <a href="/logout"><img src="{%static 'images/logout.png'%}" class="img-fluid "></a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <hr>
     <!-- <div class="container">
         {% for cloth in girls_clothes %}
         <div class="row justify-content-around mt-5 pt-5">

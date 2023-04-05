@@ -8,8 +8,10 @@
     <title>Document</title>
     {%load static%}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -20,25 +22,25 @@
                 <a href="/"><img src="{%static 'images/ashlo.png'%}" class="img-fluid w-90"></a>
             </div>
             <div class="col-md-8 d-flex justify-content-around">
-                <a href="/boys" class="boys ">
-                    <h3 class="boys">Boys Collection</h3>
-                </a>
-                {% if request.session.user_id == 1 %}
+                {% if request.session.admin == 1 %}
                 <a href="/admin" class="boys ">
                     <h3 class="boys">Add Clothes</h3>
                 </a>
                 {% endif %}
                 <a href="/girls" class="girls">
-                    <h3 class="girls">Girls Collection</h3>
+                    <h3 class="girls">Ashlo Collection</h3>
                 </a>
             </div>
             <div class="col-md-2">
                 <div class=" d-flex align-items-center justify-content-around ">
                     <div class="w-25 align-items-center mt-2">
-                        <a href="/login"><img src="{%static 'images/123.png'%}" class="img-fluid "></a>
+                        <a href="/login"><img src="{%static 'images/user.png'%}" class="img-fluid "></a>
                     </div>
                     <div class="w-25 align-items-center mt-2">
                         <a href="/cart"><img src="{%static 'images/pinkcart.png'%}" class="img-fluid "></a>
+                    </div>
+                    <div class="w-25 align-items-center mt-2">
+                        <a href="/logout"><img src="{%static 'images/logout.png'%}" class="img-fluid "></a>
                     </div>
                 </div>
             </div>
@@ -47,66 +49,126 @@
     <hr>
 
     <main class="container-fluid ">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <a href="/boys"><img src="{%static 'images/baby_3.jpeg'%}" alt="" class="img-fluid "></a>
+
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active ">
+                <video autoplay loop playsinline muted>
+                    <source src="{% static 'video/video.mp4' type='video/mp4' %}">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <div class="col-md-6">
-                <a href="/girls"><img src="{%static 'images/mini_2.jpeg'%}" alt="" class="img-fluid "></a>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <h3>Discover the New Ashlo Childrenswear Collection</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-md-4 ">
+                    <p>At Ashlo Children's Fashion, we are dedicated to providing the latest fashion trends for children
+                        aged from 0 to 16 years. Our clothing designs are unique, up-to-date, and made with high-quality
+                        materials that offer maximum comfort to your little ones. <br>
+
+                        Our main focus is on ensuring that our clothing suits every age group. From infants to
+                        teenagers, we have a diverse collection of children's clothing that includes basic items, formal
+                        pieces for special occasions, occasion wear, and casual, everyday wear. Our collection is
+                        categorized into four sections: newborns (0-18 months), babies (6-36 months), boys (2-9 years),
+                        and girls (2-9 years). We understand that each age group has different needs and preferences, so
+                        we offer a range of styles and designs that cater to their unique tastes. <br>
+
+                </div>
+                <div class="col-md-4">
+                    <p>We also offer a range of matching accessories that complete the perfect outfit, such as hats,
+                        belts, socks, tights, and bags. Our accessories are designed to complement our clothing, making
+                        it easier for parents to create a complete and stylish outfit for their little ones. We
+                        understand that first steps are important, and that's why we provide a special range of shoes
+                        designed to protect your baby's feet and aid natural movement. <br>
+
+                        In addition to our regular collection, we also have a range of school shoes and trainers that
+                        can endure busy and intense school days. Our school shoes are highly durable and comfortable,
+                        ensuring your child's feet remain protected and healthy during long school hours. We also have
+                        holiday shoes such as girls' ballet pumps and sandals for boys, so your child can look and feel
+                        their best, no matter the <br> occasion. <br>
+
+                </div>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <h3>Discover the New Ashlo Childrenswear Collection</h3>
+
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100    object-fit-contain" height="600px "
+                        src="{%static 'images/sandrad.jpg'%}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100  object-fit-cover" height="600px " src="{%static 'images/pink.png'%}"
+                        alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100  object-fit-cover" height="600px " src="{%static 'images/husah.jpg'%}"
+                        alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100  object-fit-cover" height="600px " src="{%static 'images/sss.jpg'%}"
+                        alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100  object-fit-cover" height="600px " src="{%static 'images/husham.png'%}"
+                        alt="Third slide">
+                </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <p>With Ashlo Wear, you will find the latest children’s fashion with unique designs that are up to date
-                    with current trends. Always striving for high quality clothes, our designs are made with the most
-                    exclusive fabrics for maximum comfort for babies, boys and girls.</p>
-            </div>
-            <div class="col-md-4">
-                <p>Ashlo Wear offers clothing that can suit both your child’s early stages, school days, so our
-                    collection of kids clothing ranges in size from newborn to age 16 years. Our collection aims to meet
-                    the needs of each age group.</p>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-2 ">
-                <p><img src="{%static 'images/newborn2.jpg'%}" alt="" class="img-fluid "></p>
-                <p>(0-18 months)</p>
-            </div>
-            <div class="col-md-2 ">
-                <p><img src="{%static 'images/baby-10.jpg'%}" alt="" class="img-fluid "></p>
-                <p>(18-36 months)</p>
-            </div>
-            <div class="col-md-2">
-                <p><img src="{%static 'images/mini-10.jpg'%}" alt="" class="img-fluid "></p>
-                <p>(3-9 years)</p>
-            </div>
-            <div class="col-md-2">
-                <p><img src="{%static 'images/junior-10.jpg'%}" alt="" class="img-fluid "></p>
-                <p>(10-16 years)</p>
-            </div>
-        </div>
+
+
         <hr>
         <div class="row justify-content-center ">
+
             <div class="col-1">
-                <a href=""><img src="{%static 'images/instagram.png'%}" alt="" class="img-fluid "></a>
+                <a href=""><img src="{%static 'images/instagram.png'%}" alt="" class="img-fluid  mt-1"></a>
             </div>
             <div class="col-1">
                 <a href=""><img src="{%static 'images/facebook.png'%}" alt="" class="img-fluid "></a>
             </div>
             <div class="col-1">
-                <a href=""><img src="{%static 'images/whatsapp.png'%}" alt="" class="img-fluid "></a>
+                <a href=""><img src="{%static 'images/whatsapp.png'%}" alt="" class="img-fluid h-100 "></a>
+            </div>
+
+
+            <div>
+                <i class="fa-sharp fa-solid fa-rotate-left fa-bounce"></i>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-between border-top">
+            <div>
+                <p>Palestine | English</p>
+            </div>
+            <div>
+                <p>
+                    &copy; 2023 Ashlo All rights reserved | <a href="#">Legal Advice </a> | <a href="#">Privacy
+                        Policy</a> | <a href="#">Cookies Policy </a>|<a href="#"> Information about user licenses</a>
+                </p>
+
             </div>
         </div>
     </main>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
 

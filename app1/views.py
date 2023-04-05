@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from .models import *
 import bcrypt
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def main(request):
@@ -15,9 +16,14 @@ def login_form(request):
     email = request.POST['email']
     password = request.POST['password']
     user = User.objects.filter(email=email).first()
+    email=["ibra@gmail.com","taleen@gmail.com","shadid@gmail.com"]
     if user:
         if bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['user_id'] = user.id
+            if user.email in email:
+                request.session['admin'] = 1
+            else:
+                request.session['admin'] = 0
             return redirect('/')
     messages.error(request, 'Invalid Credentials')
     return redirect('/login')
@@ -31,11 +37,13 @@ def registration(request):
     errors = User.objects.basic_validator(request.POST)
     # check if the errors dictionary has anything in it
     if len(errors) > 0:
+        error_list = []
         # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
         for key, value in errors.items():
-            messages.error(request, value)
+            error_list.append(value)
+        return JsonResponse({'success': False, 'errors': error_list})
         # redirect the user back to the form to fix the errors
-        return redirect('/register')
+        # return redirect('/register')
     else:
         fname = request.POST['first_name']
         lname = request.POST['last_name']
@@ -45,14 +53,9 @@ def registration(request):
         User.objects.create(first_name=fname, last_name=lname,email=email, password=hashed)
         user = User.objects.last()
         request.session['user_id'] = user.id
-    return redirect('/')
+        return JsonResponse({'success': True})
 
-def boys(request):
-    boys_clothes=Cloth.objects.all()
-    context={
-        'boys_clothes':boys_clothes,
-    }
-    return render(request,'boy.html',context)
+
 
 def girls(request):
     girls_clothes=Cloth.objects.all()
@@ -104,18 +107,6 @@ def add_to_cart(request,id):
     user=User.objects.get(id=request.session['user_id'])
     Clothorder.objects.create(user=user,cloth=Cloth.objects.get(id=id),quantity=int(request.POST['quantity']))
     return redirect('/cart')
-
-# def cart(request):
-#     user=User.objects.get(id=request.session['user_id'])
-#     order=Order.objects.filter(user=user)
-#     total_items=sum([oc.quanity for oc in order.ordercloth_set.all()])
-#     total_price=sum([oc.quanity * oc.cloth.price  for oc in order.ordercloth_set.all()])
-#     context={
-#         'all_cloth_orders':order.orderclothes.all(),
-#         'total_items':total_items,
-#         'total_price':total_price
-#     }
-#     return render(request,'cart.html',context)
 
 def cart(request):
     if 'user_id' not in request.session:
@@ -180,3 +171,7 @@ def delete(request,id):
     cloth_order.delete()
     return redirect('/cart')
 
+def logout(request):
+    del request.session['user_id']
+    del request.session['admin']
+    return redirect('/login')
