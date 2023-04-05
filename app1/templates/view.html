@@ -44,7 +44,7 @@
     <div class="container-fluid mt-5 ">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-4">
-                <img src="{%static 'images/%s' % cloth.pic_src %}" class="card-img-top img-fluid " alt="...">
+                <img src="{% static 'images/' %}{{cloth.pic_src }}" class="card-img-top img-fluid " alt="...">
             </div>
             <div class="col-md-5 ">
                 <p class="mb-5">Size : {{cloth.size}}</p>

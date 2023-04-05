@@ -42,7 +42,7 @@ class Address(models.Model):
     phone_num = models.IntegerField()
     city= models.CharField(max_length=45)
     street =  models.CharField(max_length=45)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(User,related_name="addresses", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = AddressManager()
@@ -82,7 +82,7 @@ class Cloth(models.Model):
 
 class Clothorder(models.Model):
     user = models.ForeignKey(User,related_name="clothorders", on_delete=models.CASCADE) # related name !!!
-    cloth = models.OneToOneField(Cloth, on_delete=models.CASCADE,primary_key=True) 
+    cloth = models.ForeignKey(Cloth,related_name="clothorders", on_delete=models.CASCADE) 
     quantity= models.PositiveIntegerField(default=1)
     
 
@@ -91,5 +91,5 @@ class Clothorder(models.Model):
     #         # Set the price to the price of the corresponding Clothes object
     #         self.price = self.clothes.price
     #     super().save(*args, **kwargs)
-    
+
 
