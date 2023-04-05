@@ -61,13 +61,13 @@
                 <img src="{% static 'images/' %}{{ cloth.pic_src }}" class="img-fluid" alt="">
                 <div>
                     <p>{{ cloth.description }}</p>
-                    <p>{{ cloth.price }}</p>
+                    <p>${{ cloth.price }}</p>
                     <a href="/view/{{ cloth.id }}" class="btn btn-primary">View</a>
                 </div>
             </div>
             {% if forloop.counter|divisibleby:3 %}
         </div>
-        <div class="row justify-content-around mt-5 pt-5">
+        <div class="row justify-content-around mt-5 pt-5 mb-5">
             {% endif %}
             {% endfor %}
         </div>

@@ -14,40 +14,61 @@
 </head>
 
 <body>
+    <header class="container-fluid ">
+        <div class="row d-flex justify-content-between align-items-center navbar navbar-expand-lg navbar-dark bg-white ">
+            <div class="col-md-2">
+                <a href="/"><img src="{%static 'images/ashlo.png'%}"  class="img-fluid w-90"></a>
+            </div>
+            <div class="col-md-8 d-flex justify-content-around">
+                <a href="/boys" class="boys "><h3 class="boys">Boys Collection</h3></a>
+                <a href="/girls" class="girls"><h3 class="girls">Girls Collection</h3></a>
+            </div>
+            <div class="col-md-2">
+                <div class=" d-flex align-items-center justify-content-around ">
+                    <div class="w-25 align-items-center mt-2">
+                        <a href="/login"><img src="{%static 'images/123.png'%}"  class="img-fluid "></a>
+                    </div>
+                    <div class="w-25 align-items-center mt-2">
+                        <a href="/cart"><img src="{%static 'images/pinkcart.png'%}"  class="img-fluid "></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="container-fluid mt-5 me-5 ms-5 d-flex justify-content-around">
-        <div>
+        <div >
             <h2 class="h2 m-5">Add Address:</h2>
-            <form action="/checkout" method="post">
+            <form action="/submit_order" method="post">
                 {% csrf_token %}
                 <div class="row mb-3">
                     <label for="phone" class="col-md-4 col-form-label">Phone </label>
                     <div class="col-sm-8">
-                        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-md-4 col-form-label">City </label>
+                    <label class="col-md-4 col-form-label" required>City </label>
                     <div class="col-sm-8">
                         <input type="text" name="city">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-md-4 col-form-label">Street</label>
+                    <label class="col-md-4 col-form-label" required>Street</label>
                     <div class="col-sm-8">
                         <input type="text" name="street">
+                    </div>
+                </div>
+                <div class="row ">
+                    <div>
+                        <button type="submit" class="btn btn-outline-primary mx-2">Submit order</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="row mt-5 me-5 ms-5">
-            <h4>Items (num)</h4>
-            <h4>Total : $</h4>
-            <div class="row ">
-                <div>
-                    <button type="submit" class="btn btn-outline-primary mx-2">Submit order</button>
-                </div>
-            </div>
+            <h4>Number of Items ({{total_items}})</h4>
+            <h4>Total : ${{total_price}}</h4>
         </div>
     </div>
     {% if messages %}

@@ -66,16 +66,7 @@ def view_cloth(request,id):
     }
     return render(request,'view.html',context)
 
-def checkout(request):
-    # errors = Address.objects.basic_validator(request.POST)
-    # # check if the errors dictionary has anything in it
-    # if len(errors) > 0:
-    #     # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
-    #     for key, value in errors.items():
-    #         messages.error(request, value)
-    #     # redirect the user back to the form to fix the errors
-    #     return redirect('/')
-    return render(request, "checkout.html")
+
 
 
 def admin(request):
@@ -107,6 +98,8 @@ def create_cloth(request):
             return redirect('/girls')
 
 def add_to_cart(request,id):
+    if 'user_id' not in request.session:
+        return redirect('/login')
     user=User.objects.get(id=request.session['user_id'])
     Clothorder.objects.create(user=user,cloth=Cloth.objects.get(id=id),quantity=int(request.POST['quantity']))
     return redirect('/cart')
@@ -124,6 +117,8 @@ def add_to_cart(request,id):
 #     return render(request,'cart.html',context)
 
 def cart(request):
+    if 'user_id' not in request.session:
+        return redirect('/login')
     user = User.objects.get(id=request.session['user_id'])
     ordered_clothes = user.clothorders.all() # filter OrderCloth objects by order id
     total_items = sum([oc.quantity for oc in user.clothorders.all()])
@@ -135,4 +130,52 @@ def cart(request):
     }
     return render(request, 'cart.html', context)
 
+def checkout(request):
+    user = User.objects.get(id=request.session['user_id'])
+    total_items = sum([oc.quantity for oc in user.clothorders.all()])
+    total_price = sum([oc.quantity * oc.cloth.price for oc in user.clothorders.all()])
+    context = {
+        'total_items': total_items,
+        'total_price': total_price
+    }
+    return render(request, "checkout.html",context)
+
+def submit_order(request):
+    errors = Address.objects.basic_validator(request.POST)
+    # check if the errors dictionary has anything in it
+    if len(errors) > 0:
+        # if the errors dictionary contains anything, loop through each key-value pair and make a flash message
+        for key, value in errors.items():
+            messages.error(request, value)
+        # redirect the user back to the form to fix the errors
+        return redirect('/checkout')
+    else:
+        user = User.objects.get(id=request.session['user_id'])
+        ordered_clothes = user.clothorders.all()
+        ordered_clothes.delete()
+        Address.objects.create(phone_num=request.POST['phone'],city=request.POST['city'],street=request.POST['street'],user=user)
+        return redirect('/order_success')
+
+def order_success(request):
+    return render(request, 'order_success.html')    
+
+def delete_users(request):
+    # User.objects.all().delete()
+    # Address.objects.all().delete()
+    # Clothorder.objetcs.all().delete()
+    # Cloth.objects.all().delete()
+    del request.session['user_id']
+    return redirect('/')
+
+def edit_quantity(request,id):
+    cloth_order=Clothorder.objects.get(id=id)
+    quantity=request.POST['quantity']
+    cloth_order.quantity=quantity
+    cloth_order.save()
+    return redirect('/cart')
+
+def delete(request,id):
+    cloth_order=Clothorder.objects.get(id=id)
+    cloth_order.delete()
+    return redirect('/cart')
 
