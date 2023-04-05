@@ -75,14 +75,14 @@ class Cloth(models.Model):
     objects = ClothManager()
 
 
-class Order(models.Model):
-    user = models.ForeignKey(User, related_name="orders", on_delete=models.CASCADE) #relation?????
-    total_amount= models.DecimalField(max_digits=10 , decimal_places=2,null=True)
-    cloth =  models.ManyToManyField(Cloth, through='OrderCloth')
+# class Order(models.Model):
+#     user = models.ForeignKey(User, related_name="orders", on_delete=models.CASCADE) #relation?????
+#     total_amount= models.DecimalField(max_digits=10 , decimal_places=2,null=True)
+#     cloth =  models.ManyToManyField(Cloth, through='OrderCloth')
 
-class OrderCloth(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE) # related name !!!
-    cloth = models.ForeignKey(Cloth,  on_delete=models.CASCADE)
+class Clothorder(models.Model):
+    user = models.ForeignKey(User,related_name="clothorders", on_delete=models.CASCADE) # related name !!!
+    cloth = models.OneToOneField(Cloth, on_delete=models.CASCADE,primary_key=True) 
     quantity= models.PositiveIntegerField(default=1)
     
 
