@@ -51,12 +51,7 @@ def registration(request):
         request.session['user_id'] = user.id
     return redirect('/')
 
-def boys(request):
-    boys_clothes=Cloth.objects.all()
-    context={
-        'boys_clothes':boys_clothes,
-    }
-    return render(request,'boy.html',context)
+
 
 def girls(request):
     girls_clothes=Cloth.objects.all()
