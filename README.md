@@ -55,3 +55,22 @@ the-clothing-website - Main application directory.
 5- Templates - Holds all html files. 
 
 6 - Models - Represent our database
+
+##	Requirements
+
+•	The website should allow admins to perform CRUD operations, such as adding, editing, and deleting clothes.
+
+•	Customers should be able to login, view, add, and remove clothes from their cart.
+
+•	The login and registration pages should include validation and use Ajax for a better user experience.
+
+•	The website should have at least 3 responsive pages to ensure that it is accessible and easy to use on different devices.
+
+•	Login and registration pages 
+
+
+## languages used
+•	Python3
+•	CSS3
+•	HTML5
+•	JavaScript
