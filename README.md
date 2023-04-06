@@ -16,8 +16,8 @@ An online E-commerce website for children's clothes
    
    2- Register/login user.
    
-   <img src="https://user-images.githubusercontent.com/126386351/230318069-1f9ae49c-33e8-46be-9203-ab1c8110f2d7.png" width="300">
- <img src="https://user-images.githubusercontent.com/126386351/230318580-fd88f1eb-898d-4522-8a5d-6fc9eac0755e.png" width="300">
+   <img src="https://user-images.githubusercontent.com/126386351/230318069-1f9ae49c-33e8-46be-9203-ab1c8110f2d7.png" width="550">
+ <img src="https://user-images.githubusercontent.com/126386351/230318580-fd88f1eb-898d-4522-8a5d-6fc9eac0755e.png" width="550">
    
    3- Ashlo collection page.
    
