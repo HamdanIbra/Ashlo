@@ -10,7 +10,9 @@ An online E-commerce website for children's clothes
 
 
 ##  Features
-   1- Main page. <img src="https://user-images.githubusercontent.com/126386351/230316828-705797d7-e5e7-4f5b-9d58-5dbd87c5b738.png" width="150">
+   1- Main page. 
+   
+   <img src="https://user-images.githubusercontent.com/126386351/230316828-705797d7-e5e7-4f5b-9d58-5dbd87c5b738.png" width="550">
    
    2- Register/login user.
    
