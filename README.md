@@ -31,7 +31,9 @@ An online E-commerce website for children's clothes
 
 <img src="https://user-images.githubusercontent.com/126386351/230319559-a15a2702-7e33-44bd-9ba4-244606859e04.png" width="550">
    
-   8- Submited order page
+   8- Submited order page.
+   
+<img src="https://user-images.githubusercontent.com/126386351/230320222-4c6553c2-9c03-4a34-b4ea-2d97e4465682.png" width="550">
    
 Browse products: Users can browse available products in the store.
 
