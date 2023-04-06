@@ -71,6 +71,9 @@ the-clothing-website - Main application directory.
 
 ## languages used
 •	Python3
+
 •	CSS3
+
 •	HTML5
+
 •	JavaScript
