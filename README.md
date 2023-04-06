@@ -28,6 +28,8 @@ An online E-commerce website for children's clothes
    6- Checkout page.
    
    7- Add clothes feature for the Admin.
+
+<img src="https://user-images.githubusercontent.com/126386351/230319559-a15a2702-7e33-44bd-9ba4-244606859e04.png" width="550">
    
    8- Submited order page
    
